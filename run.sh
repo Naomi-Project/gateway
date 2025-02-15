@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Pastikan argumen NetworkName diberikan saat menjalankan script
 if [ "$#" -lt 1 ]; then
@@ -10,15 +11,15 @@ NETWORK_NAME="$1"
 
 # Cek apakah network sudah ada; jika tidak, buat network baru
 if ! docker network inspect "$NETWORK_NAME" &>/dev/null; then
-  echo "Network $NETWORK_NAME tidak ditemukan. Membuat network baru..."
+  echo "Network '$NETWORK_NAME' tidak ditemukan. Membuat network baru..."
   docker network create "$NETWORK_NAME"
 else
-  echo "Network $NETWORK_NAME sudah ada."
+  echo "Network '$NETWORK_NAME' sudah ada."
 fi
 
-# Eksport variabel agar dapat digunakan oleh docker compose
+# Eksport variabel agar dapat digunakan oleh docker-compose
 export NETWORK_NAME
 
-# Jalankan docker compose
+# Jalankan docker-compose
 echo "Menjalankan docker-compose..."
 docker compose up -d
