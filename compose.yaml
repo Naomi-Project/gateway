@@ -1,3 +1,8 @@
+x-common-networks: &common-networks
+  networks:
+    ${NETWORK_NAME}:
+      external: true
+
 services:
   traefik:
     image: traefik:latest
@@ -12,8 +17,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - ${NETWORK_NAME}
+      - web
 
 networks:
-  ${NETWORK_NAME}:
+  web:
     external: true
