@@ -27,7 +27,6 @@ The Gateway project enables secure, isolated container communication by leveragi
     In each docker-compose file—both for the frontend and backend—ensure you add the appropriate Traefik labels. These labels define routing rules and entrypoints so that Traefik can automatically detect and route incoming requests to the correct service.
 
     For example, in your docker-compose file, you might add labels like these:
-
     For the Frontend service:
     ```yaml
     services:
@@ -39,6 +38,8 @@ The Gateway project enables secure, isolated container communication by leveragi
           - "traefik.enable=true"
           - "traefik.http.routers.frontend.rule=Host(`frontend.example.com`)"
           - "traefik.http.routers.frontend.entrypoints=web"
+        networks:
+          - web
     ```
 
     For the Backend service:
@@ -50,9 +51,16 @@ The Gateway project enables secure, isolated container communication by leveragi
           - "traefik.enable=true"
           - "traefik.http.routers.backend.rule=Host(`api.example.com`)"
           - "traefik.http.routers.backend.entrypoints=web"
+        networks:
+          - web
     ```
 
-    These examples ensure each service is properly registered with Traefik through:
+    Remember to declare your external network in the compose file:
+    ```yaml
+    networks:
+      web:
+        external: true
+    ```
     - Enabling Traefik for the service.
     - Defining a routing rule that directs traffic based on the host header.
     - Specifying the Traefik entrypoint (e.g., web).
