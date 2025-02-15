@@ -38,7 +38,7 @@ The Gateway project enables secure, isolated container communication by leveragi
         labels:
           - "traefik.enable=true"
           - "traefik.http.routers.frontend.rule=Host(`frontend.example.com`)"
-          - "traefik.http.routers.frontend.entrypoints=http"
+          - "traefik.http.routers.frontend.entrypoints=web"
     ```
 
     For the Backend service:
@@ -49,13 +49,13 @@ The Gateway project enables secure, isolated container communication by leveragi
         labels:
           - "traefik.enable=true"
           - "traefik.http.routers.backend.rule=Host(`api.example.com`)"
-          - "traefik.http.routers.backend.entrypoints=http"
+          - "traefik.http.routers.backend.entrypoints=web"
     ```
 
     These examples ensure each service is properly registered with Traefik through:
     - Enabling Traefik for the service.
     - Defining a routing rule that directs traffic based on the host header.
-    - Specifying the Traefik entrypoint (e.g., HTTP).
+    - Specifying the Traefik entrypoint (e.g., web).
 
     Adjust the labels and rules according to your specific environment and domain configuration.
 
