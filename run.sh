@@ -16,6 +16,9 @@ else
   echo "Network $NETWORK_NAME sudah ada."
 fi
 
-# Jalankan docker-compose
+# Eksport variabel agar dapat digunakan oleh docker compose
+export NETWORK_NAME
+
+# Jalankan docker compose
 echo "Menjalankan docker-compose..."
-docker compose up -d 
+docker compose up -d
